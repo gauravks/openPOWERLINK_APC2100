@@ -66,15 +66,14 @@ Section "PCIe Driver" section1
 ;Create directories in program files.
     WriteRegStr HKCU "Software\Anatares PCIe Driver" "" "$INSTDIR"
     SetOutPath "$INSTDIR\Driver"
-    File  /r "..\..\..\oplk\bin\windows\amd64\drv_ndis_pcie Package\*.*"
+    File  /r "..\..\..\bin\windows\amd64\drv_ndis_pcie Package\*.*"
     File  /r "..\..\..\oplk\bin\windows\amd64\installer-pcie\*.*"
     File  /r "..\..\..\oplk\bin\windows\amd64\uninstaller-pcie\*.*"
-    File "..\inf\drv_ndis_pcie.inf"
     SetOutPath "$INSTDIR\Temp"
     File /r "vcredist_x64.exe"
 
 ;Create shortcuts
-ExecWait "$INSTDIR\Temp\vcredist_x64.exe"
+ExecWait "$INSTDIR\Temp\vcredist_x64.exe /passive /norestart"
 SetOutPath "$INSTDIR\Driver"
 ExecWait "$INSTDIR\Driver\installer-pcie.exe"
 WriteUninstaller $INSTDIR\uninstaller.exe
