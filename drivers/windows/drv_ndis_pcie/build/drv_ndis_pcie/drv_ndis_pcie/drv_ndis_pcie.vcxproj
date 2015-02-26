@@ -304,7 +304,8 @@
       <AssemblyDebug>true</AssemblyDebug>
     </Link>
     <Inf>
-      <TimeStamp>2.1.1.0</TimeStamp>
+      <TimeStamp>2.1.1.2</TimeStamp>
+      <SpecifyDriverVerDirectiveVersion>true</SpecifyDriverVerDirectiveVersion>
     </Inf>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Release|x64'">

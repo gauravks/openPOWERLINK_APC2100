@@ -7,7 +7,7 @@ Signature   = "$WINDOWS NT$"
 Class       = Net
 ClassGuid   = {4d36e972-e325-11ce-bfc1-08002be10318}
 Provider    = %ManufacturerName%
-DriverVer   = 29/09/2014,1.0.0
+DriverVer   = 29/09/2014,2.1.1.2
 CatalogFile=drv_ndis_pcie.cat
 
 [Manufacturer]
@@ -19,9 +19,9 @@ ExcludeFromSelect = *
 [OPLK.NT$ARCH$]
 ; DisplayName                 Section             DeviceID
 ; -----------                 -------             --------
-%OPLK.DevDesc%              = OPLK.xil_pcie,      PCI\VEN_1677&DEV_E53f     ; B&R Antares Interface Card
+%OPLK.DevDesc%              = OPLK.fpga_pcie,      PCI\VEN_1677&DEV_E53f     ; B&R Antares Interface Card
 
-[OPLK.xil_pcie]
+[OPLK.fpga_pcie]
 Characteristics = 0x84 ; NCF_HAS_UI | NCF_PHYSICAL
 BusType         = 5    ; PCI
 AddReg          = oplk.reg
@@ -30,10 +30,10 @@ CopyFiles       = oplk.CopyFiles
 *MediaType      = 0     ; NdisMedium802_3
 *PhysicalMediaType = 14 ; NdisPhysicalMedium802_3
 
-[OPLK.xil_pcie.Services]
+[OPLK.fpga_pcie.Services]
 AddService = oplkMiniport, 2, oplk.Service, oplk.EventLog
 
-[OPLK.xil_pcie.HW]
+[OPLK.fpga_pcie.HW]
 Needs = PciIoSpaceNotRequired
 AddReg = MSI.reg
 
