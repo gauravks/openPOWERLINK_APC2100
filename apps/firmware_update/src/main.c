@@ -155,7 +155,10 @@ int main(int argc, char** argv)
 
     memset(&opts, 0, sizeof(tOptions));
 
-    getOptions(argc, argv, &opts);
+    if (getOptions(argc, argv, &opts) == -1)
+    {
+        return -1;
+    }
 
     if (system_init() != 0)
     {
@@ -328,7 +331,7 @@ static int getOptions(int argc_p, char** argv_p, tOptions* pOpts_p)
     strncpy(pOpts_p->fwImage, "image.bin", 256);
 
     /* get command line parameters */
-    while ((opt = getopt(argc_p, argv_p, "ie")) != -1)
+    while ((opt = getopt(argc_p, argv_p, "i:e")) != -1)
     {
         switch (opt)
         {
@@ -339,7 +342,9 @@ static int getOptions(int argc_p, char** argv_p, tOptions* pOpts_p)
                 pOpts_p->fInvalidateUpdateImage = TRUE;
                 break;
             default: /* '?' */
-                printf("Usage: %s [-i UPDATE IMAGE {-e INVALIDATE IMAGE} ] \n", argv_p[0]);
+                printf("Usage: %s [-i <UPDATE IMAGE> -e] \n"
+                       "-i <UPDATE IMAGE>: Use the specified update image\n"
+                       "-e : Invalidate the existing update image\n", argv_p[0]);
                 return -1;
         }
     }
@@ -457,7 +462,8 @@ static tOplkError updateFirmwareImage(UINT8* pFwBuffer_p, INT length_p)
 /**
 \brief  Invalidate firmware image
 
-The function invalidates the update firmware in the flash.
+The function invalidates the update image by erasing the firmware header and
+instructs the firmware to reconfigure from factory image.
 
 \return The function returns the tOplkError error code.
 
